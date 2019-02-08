@@ -1,5 +1,3 @@
-
-
 import Hapi from 'hapi'
 import HapiSwagger from 'hapi-swagger'
 import Package from '../package.json'
@@ -7,7 +5,7 @@ import Package from '../package.json'
 const config = {
   api: {
     host: '0.0.0.0',
-    port: 8080
+    port: 3000
   }
 }
 
@@ -18,8 +16,8 @@ const server = new Hapi.Server({
 })
 
 const swaggerOptions = {
+  title: 'Test API Documentation',
   info: {
-    title: 'Test API Documentation',
     version: Package.version
   }
 }
