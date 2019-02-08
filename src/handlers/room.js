@@ -28,7 +28,7 @@ export default function (models, services) {
                 .then(rooms => 
                     rooms.map(({time,mean,room}) => ({
                         time,
-                        presence : mean > 60,
+                        presence : mean < 60,
                         room
                     }))
                 )
