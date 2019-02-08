@@ -1,20 +1,30 @@
 export default function (influxDb) {
     return {
-        get(){
+        getLeaderboard() {
             return influxDb
                 .query(
-                    'SELECT sum("value") FROM "measurement" WHERE time > now()-1h GROUP BY "room"'
+                    `SELECT sum("value") FROM "measurement" 
+                WHERE time > now()-1h AND "captorName"='sound' 
+                GROUP BY "room"`
                 )
-                .then((results)=> results.sort((a,b)=>a.sum < b.sum).map((results, index)=>{
-                        const {time, sum, room} = results
-                        return {
-                            time, 
-                            level: sum,
-                            room,
-                            rank: index+1
-                        }
-                    })
+
+        },
+        getSound(){
+            return influxDb
+                .query(
+                    `SELECT mean("value") FROM "measurement" 
+                WHERE time > now()-5s AND "captorName"='sound' 
+                GROUP BY "room"`
                 )
-            }
+              
+        },
+        getDistance(){
+            return influxDb
+                .query(
+                    `SELECT mean("value") FROM "measurement" 
+                WHERE time > now()-2m AND "captorName"='distance' 
+                GROUP BY "room"`
+                )
+        }
     }
 }
