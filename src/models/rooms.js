@@ -4,7 +4,7 @@ export default function (influxDb) {
             return influxDb
                 .query(
                     `SELECT sum("value") FROM "measurement" 
-                WHERE time > now()-1h AND "captorName"='sound' 
+                WHERE time > now()-1m AND "captorName"='sound' 
                 GROUP BY "room"`
                 )
 
