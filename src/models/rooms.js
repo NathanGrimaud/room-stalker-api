@@ -21,7 +21,7 @@ export default function (influxDb) {
         getDistance(){
             return influxDb
                 .query(
-                    `SELECT mean("value") FROM "measurement" 
+                    `SELECT last("value") FROM "measurement" 
                 WHERE time > now()-2m AND "captorName"='distance' 
                 GROUP BY "room"`
                 )
