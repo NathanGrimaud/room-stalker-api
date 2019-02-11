@@ -26,9 +26,9 @@ export default function (models, services) {
         getPresence(){
             return models.getDistance()
                 .then(rooms => 
-                    rooms.map(({time,mean,room}) => ({
+                    rooms.map(({time,last,room}) => ({
                         time,
-                        presence : mean < 60,
+                        presence : last < 60,
                         room
                     }))
                 )
