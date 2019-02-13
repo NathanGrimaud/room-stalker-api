@@ -4,7 +4,7 @@ export default function (influxDb) {
             return influxDb
                 .query(
                     `SELECT sum("value") FROM "measurement" 
-                WHERE time > now()-1m AND "captorName"='sound' 
+                WHERE time > now()-1m AND time < now()+1m AND "captorName"='sound' 
                 GROUP BY "room"`
                 )
 
@@ -12,8 +12,8 @@ export default function (influxDb) {
         getSound(){
             return influxDb
                 .query(
-                    `SELECT sum("value") FROM "measurement" 
-                WHERE time > now()-5s AND "captorName"='sound' 
+                    `SELECT mean("value") FROM "measurement" 
+                WHERE time > now()-5s  AND time < now()+5s AND "captorName"='sound' 
                 GROUP BY "room"`
                 )
               
@@ -22,7 +22,7 @@ export default function (influxDb) {
             return influxDb
                 .query(
                     `SELECT last("value") FROM "measurement" 
-                WHERE time > now()-2m AND "captorName"='distance' 
+                WHERE time > now()-2m AND time < now()+2m AND "captorName"='distance' 
                 GROUP BY "room"`
                 )
         }
