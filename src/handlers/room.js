@@ -16,9 +16,9 @@ export default function (models, services) {
         getSound(){
             return models.getSound()
                 .then(rooms =>
-                    rooms.map(({ time, mean, room }) => ({
+                    rooms.map(({ time, last, room }) => ({
                         time,
-                        level: mean,
+                        level: last,
                         room
                     }))
                 )

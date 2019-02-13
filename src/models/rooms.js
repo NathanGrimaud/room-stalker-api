@@ -12,7 +12,7 @@ export default function (influxDb) {
         getSound(){
             return influxDb
                 .query(
-                    `SELECT mean("value") FROM "measurement" 
+                    `SELECT last("value") FROM "measurement" 
                 WHERE time > now()-5s AND "captorName"='sound' 
                 GROUP BY "room"`
                 )
