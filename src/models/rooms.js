@@ -7,7 +7,7 @@ export default function (influxDb) {
                         select "value" FROM "measurement" 
                         WHERE time > now()-1m AND "captorName"='sound' 
                         GROUP BY "room" ORDER BY time DESC LIMIT 5 
-                    ) ORDER BY time DESC LIMIT 5`
+                    )  GROUP BY "room" ORDER BY time DESC LIMIT 5`
                 )
 
         },
@@ -18,7 +18,7 @@ export default function (influxDb) {
                         select "value" FROM "measurement" 
                         WHERE time > now()-5s AND "captorName"='sound' 
                         GROUP BY "room" ORDER BY time DESC LIMIT 5 
-                    ) ORDER BY time DESC LIMIT 5`
+                    )  GROUP BY "room" ORDER BY time DESC LIMIT 5`
                 )
               
         },
