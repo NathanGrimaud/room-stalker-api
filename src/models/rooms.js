@@ -3,18 +3,22 @@ export default function (influxDb) {
         getLeaderboard() {
             return influxDb
                 .query(
-                    `SELECT sum("value") FROM "measurement" 
-                WHERE time > now()-1m AND "captorName"='sound' 
-                GROUP BY "room"`
+                    `SELECT sum("value") FROM (
+                        select "value" FROM "measurement" 
+                        WHERE time > now()-1m AND "captorName"='sound' 
+                        GROUP BY "room" ORDER BY time DESC LIMIT 5 
+                    ) ORDER BY time DESC LIMIT 5`
                 )
 
         },
         getSound(){
             return influxDb
                 .query(
-                    `SELECT mean("value") FROM "measurement" 
-                WHERE time > now()-5s AND "captorName"='sound' 
-                GROUP BY "room"`
+                    `SELECT mean("value") FROM (
+                        select "value" FROM "measurement" 
+                        WHERE time > now()-5s AND "captorName"='sound' 
+                        GROUP BY "room" ORDER BY time DESC LIMIT 5 
+                    ) ORDER BY time DESC LIMIT 5`
                 )
               
         },
